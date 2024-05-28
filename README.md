@@ -21,6 +21,6 @@ cd django_1
 
 python -m venv .venv
 
-venv\Scripts\activate
+.\.venv\Scripts\activate
 
 pip install -r requirements.txt
