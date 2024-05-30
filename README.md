@@ -21,7 +21,7 @@ Para mantener las dependencias del proyecto aisladas, se recomienda utilizar un 
 
 ```bash
 python -m venv .venv
-.\venv\Scripts\activate
+.\.venv\Scripts\activate
 ```
 
 #### En macOS y Linux
@@ -46,3 +46,5 @@ Ahora estás listo para ejecutar el proyecto. Dependiendo de cómo esté configu
 ```bash
 python manage.py runserver
 ```
+![image](https://github.com/elrichardby11/django_1/assets/76932746/35c1805c-da45-42af-b2ab-414defa927be)
+
