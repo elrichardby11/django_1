@@ -42,16 +42,16 @@
       </div>
     </nav>
 
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 justify-content-center">
       <!-- Columna del formulario de registro -->
       <div class="row">
-        <h3 class="mb-3">Agregar nuevo empleado</h3>
+        <h3 class="mb-3">Editando empleado</h3>
         <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
           <form
             class="form-control"
-            action="registrar_empleado/"
+            action="actualizar_empleado/"
             method="POST"
-            style="padding: 10px"
+            style="padding: 10px"|
           >
             {% csrf_token %}
             <div class="mb-3">
@@ -63,6 +63,7 @@
                 required
                 maxlength="12"
                 placeholder="Rut"
+                value="{{empleado.rut}}"
               />
             </div>
             <div class="mb-3">
@@ -73,6 +74,7 @@
                 name="txtNombre"
                 required
                 placeholder="Nombre"
+                value="{{empleado.nombre}}"
               />
             </div>
             <div class="mb-3">
@@ -82,6 +84,7 @@
                 id="txtApellido"
                 name="txtApellido"
                 placeholder="Apellido"
+                value="{{empleado.apellido}}"
               />
             </div>
             <div class="mb-3">
@@ -92,6 +95,7 @@
                 name="txtCorreo"
                 required
                 placeholder="correo@gmail.com"
+                value="{{empleado.correo}}"
               />
             </div>
             <div class="mb-3">
@@ -102,16 +106,16 @@
                 id="Fecha"
                 name="Fecha"
                 required
-                value="2000-01-01"
+                value={{empleado.fechaNacimiento|date:"Y-m-d"}}
               />
             </div>
             <div class="mb-3">
               <label for="pais">País</label><br />
               <select class="form-select" name="Pais" id="Pais">
-                <option value="Chile">Chile</option>
-                <option value="Argentina">Argentina</option>
-                <option value="Perú">Perú</option>
-                <option value="Colombia">Colombia</option>
+                <option value="Chile"{% if empleado.pais == "Chile" %} selected {% endif %}>Chile</option>
+                <option value="Argentina"{% if empleado.pais == "Argentina" %} selected {% endif %}>Argentina</option>
+                <option value="Perú"{% if empleado.pais == "Peru" %} selected {% endif %}>Perú</option>
+                <option value="Colombia"{% if empleado.pais == "Colombia" %} selected {% endif %}>Colombia</option>
               </select>
             </div>
             <div class="form-group mb-3">
@@ -123,7 +127,9 @@
                   name="Genero"
                   value="M"
                   id="Masculino"
-                  checked
+                  {% if empleado.genero == "M" %}
+                    checked
+                  {% endif %}
                 />
                 <label class="form-check-label">Masculino</label>
               </div>
@@ -134,6 +140,9 @@
                   name="Genero"
                   value="F"
                   id="Femenino"
+                  {% if empleado.genero == "F" %}
+                    checked
+                  {% endif %}
                 />
                 <label class="form-check-label">Femenino</label>
               </div>
@@ -144,48 +153,12 @@
                 class="btn btn-success text-center"
                 style="margin: 10px; width: 150px; justify-content: center"
               >
-                Guardar
+                Actualizar
               </button>
             </div>
           </form>
         </div>
 
-        <!-- Columna del visor de usuarios registrados -->
-        <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="row">Rut</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Correo</th>
-                <th>Fecha de Nacimiento</th>
-                <th>País</th>
-                <th>Genero</th>
-                <th>Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for empleado in empleados %}
-              <tr>
-                <td>{{empleado.rut}}</td>
-                <td>{{empleado.nombre}}</td>
-                <td>{{empleado.apellido}}</td>
-                <td>{{empleado.correo}}</td>
-                <td>{{empleado.fechaNacimiento}}</td>
-                <td>{{empleado.pais}}</td>
-                <td>{{empleado.genero}}</td>
-                <td class="text-center">
-                  <a href="editar_empleado/{{empleado.rut}}" class="btn btn-primary btn-md">Editar</a>
-                </td>
-                <td class="text-center">
-                  <a href="" class="btn btn-danger btn-md">Eliminar</a>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   </body>

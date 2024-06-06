@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from empleados.models import Empleado
 
@@ -21,3 +22,28 @@ def registrarEmpleado(request):
     )
     return redirect("/empleados")
     
+def editarEmpleado(request, rut):
+    empleado = Empleado.objects.get(rut=rut)
+    return render(request, "editar_empleado.html",context={"empleado": empleado,})
+
+def actualizarEmpleado(request):
+    rut = request.POST['txtRut']
+    nombre = request.POST["txtNombre"]
+    apellido = request.POST["txtApellido"]
+    correo = request.POST["txtCorreo"]
+    fecha = request.POST["Fecha"]
+    pais = request.POST["Pais"]
+    genero = request.POST["Genero"]
+
+    empleado = Empleado.objects.get(rut=rut)
+    empleado.rut= rut
+    empleado.nombre = nombre
+    empleado.apellido = apellido
+    empleado.correo = correo
+    empleado.fechaNacimiento = fecha
+    empleado.pais = pais
+    empleado.genero = genero
+
+    empleado.save()
+
+    return redirect('/empleados')
