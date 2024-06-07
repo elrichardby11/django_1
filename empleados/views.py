@@ -47,3 +47,9 @@ def actualizarEmpleado(request):
     empleado.save()
 
     return redirect('/empleados')
+
+def eliminarEmpleado(request, rut):
+    empleado = Empleado.objects.get(rut=rut)
+    empleado.delete()
+    
+    return redirect('/empleados')

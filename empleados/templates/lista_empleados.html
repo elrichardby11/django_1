@@ -176,10 +176,18 @@
                 <td>{{empleado.pais}}</td>
                 <td>{{empleado.genero}}</td>
                 <td class="text-center">
-                  <a href="editar_empleado/{{empleado.rut}}" class="btn btn-primary btn-md">Editar</a>
+                  <a
+                    href="editar_empleado/{{empleado.rut}}"
+                    class="btn btn-primary btn-md"
+                    >Editar</a
+                  >
                 </td>
                 <td class="text-center">
-                  <a href="" class="btn btn-danger btn-md">Eliminar</a>
+                  <a
+                    href="eliminar_empleado/{{empleado.rut}}"
+                    class="btn btn-danger btn-md"
+                    >Eliminar</a
+                  >
                 </td>
               </tr>
               {% endfor %}
