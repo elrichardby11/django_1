@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from empleados.models import Empleado
@@ -15,41 +16,62 @@ def registrarEmpleado(request):
     pais = request.POST["Pais"]
     genero = request.POST["Genero"]
 
-    # Crear empleado 
-    empleado = Empleado.objects.create(
-        rut=rut, nombre=nombre, apellido=apellido,
-        correo=correo, fechaNacimiento=fecha, pais=pais, genero=genero
-    )
-    return redirect("/empleados")
+    try:
+        # Crear empleado 
+        empleado = Empleado.objects.create(
+            rut=rut, nombre=nombre, apellido=apellido,
+            correo=correo, fechaNacimiento=fecha, pais=pais, genero=genero
+        )
+    except Exception as e:
+        if e.__class__.__name__ == "IntegrityError":
+            if "rut" in e.args[0]:
+                e = "El rut ingresado ya existe! "
+            elif "correo" in e.args[0]:
+                e = "El correo ingresado ya existe! "
+        messages.error(request, f"Error al crear empleado: {e}")
+    else:
+        messages.success(request, "Empleado registrado correctamente! ")
+    finally:
+        return redirect("/empleados")
     
 def editarEmpleado(request, rut):
     empleado = Empleado.objects.get(rut=rut)
     return render(request, "editar_empleado.html",context={"empleado": empleado,})
 
 def actualizarEmpleado(request):
-    rut = request.POST['txtRut']
-    nombre = request.POST["txtNombre"]
-    apellido = request.POST["txtApellido"]
-    correo = request.POST["txtCorreo"]
-    fecha = request.POST["Fecha"]
-    pais = request.POST["Pais"]
-    genero = request.POST["Genero"]
+    try:
+        rut = request.POST['txtRut']
+        nombre = request.POST["txtNombre"]
+        apellido = request.POST["txtApellido"]
+        correo = request.POST["txtCorreo"]
+        fecha = request.POST["Fecha"]
+        pais = request.POST["Pais"]
+        genero = request.POST["Genero"]
 
-    empleado = Empleado.objects.get(rut=rut)
-    empleado.rut= rut
-    empleado.nombre = nombre
-    empleado.apellido = apellido
-    empleado.correo = correo
-    empleado.fechaNacimiento = fecha
-    empleado.pais = pais
-    empleado.genero = genero
+        empleado = Empleado.objects.get(rut=rut)
+        empleado.rut= rut
+        empleado.nombre = nombre
+        empleado.apellido = apellido
+        empleado.correo = correo
+        empleado.fechaNacimiento = fecha
+        empleado.pais = pais
+        empleado.genero = genero
 
-    empleado.save()
-
-    return redirect('/empleados')
+        empleado.save()
+    except Exception as e:
+        messages.error(request, f"Error al crear empleado: {e}")
+    else:
+        messages.success(request, "Empleado editado correctamente! ")
+    finally:
+        return redirect('/empleados')
 
 def eliminarEmpleado(request, rut):
-    empleado = Empleado.objects.get(rut=rut)
-    empleado.delete()
-    
-    return redirect('/empleados')
+    try:
+        empleado = Empleado.objects.get(rut=rut)
+        empleado.delete()
+    except Exception as e:
+        messages.error(request, f"Error al crear empleado: {e}")
+    else:
+        messages.success(request, "Empleado eliminado correctamente! ")
+    finally:
+        return redirect('/empleados')
