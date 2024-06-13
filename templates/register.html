@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xl-8 col-lg-10 col-md-12 m-auto">
+            <div class="row">
+                <div class="col-lg-6 col-md-8">
+                    <div class="login wrap widget-taber-content background-white">
+                        <div class="padding eight all bg-white">
+                            <div class="heading_s1">
+                                <h1 class="mb-5">Registrar Usuario</h1>
+                                <p class="mb-30">Ya tienes una cuenta? <a href="{% url 'login'%}">Login</a></p>
+                            </div>
+                            <form action="{% url 'register' %}" method="post">
+                                {% csrf_token %}
+                                {{form}}
+                                <div class="form-group d-grid gap-2 col-8 mx-auto">
+                                    <button type="submit" class="btn btn-success btn-block mt-2">Registrar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

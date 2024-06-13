@@ -4,124 +4,124 @@
     <div class="container-fluid mt-3">
       <div class="row">
         <h3 class="mb-3">Agregar nuevo empleado</h3>
-        <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
-          <form
-            class="form-control"
-            action="registrar_empleado/"
-            method="POST"
-            style="padding: 10px"
-          >
-            {% csrf_token %}
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="txtRut"
-                name="txtRut"
-                required
-                maxlength="12"
-                placeholder="Rut"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="txtNombre"
-                name="txtNombre"
-                required
-                placeholder="Nombre"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="txtApellido"
-                name="txtApellido"
-                placeholder="Apellido"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-                type="email"
-                class="form-control"
-                id="txtCorreo"
-                name="txtCorreo"
-                required
-                placeholder="correo@gmail.com"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="fecha">Fecha de nacimiento: </label>
-              <input
-                type="date"
-                class="form-control"
-                id="Fecha"
-                name="Fecha"
-                required
-                value="2000-01-01"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="pais">País</label><br />
-              <select class="form-select" name="Pais" id="Pais">
-                <option value="Chile">Chile</option>
-                <option value="Argentina">Argentina</option>
-                <option value="Perú">Perú</option>
-                <option value="Colombia">Colombia</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <label class="form-check-label">Genero</label>
-              <div class="form-check">
+          <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            <form
+              class="form-control"
+              action="registrar_empleado/"
+              method="POST"
+              style="padding: 10px"
+            >
+              {% csrf_token %}
+              <div class="mb-3">
                 <input
-                  class="form-check-input"
-                  type="radio"
-                  name="Genero"
-                  value="M"
-                  id="Masculino"
-                  checked
+                  type="text"
+                  class="form-control"
+                  id="txtRut"
+                  name="txtRut"
+                  required
+                  maxlength="12"
+                  placeholder="Rut"
                 />
-                <label class="form-check-label">Masculino</label>
               </div>
-              <div class="form-check">
+              <div class="mb-3">
                 <input
-                  class="form-check-input"
-                  type="radio"
-                  name="Genero"
-                  value="F"
-                  id="Femenino"
+                  type="text"
+                  class="form-control"
+                  id="txtNombre"
+                  name="txtNombre"
+                  required
+                  placeholder="Nombre"
                 />
-                <label class="form-check-label">Femenino</label>
               </div>
-            </div>
-            <div class="d-flex justify-content-center">
-              <button
-                type="submit"
-                class="btn btn-success text-center"
-                style="margin: 10px; width: 150px; justify-content: center"
-              >
-                Guardar
-              </button>
-            </div>
-          </form>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtApellido"
+                  name="txtApellido"
+                  placeholder="Apellido"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="txtCorreo"
+                  name="txtCorreo"
+                  required
+                  placeholder="correo@gmail.com"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="fecha">Fecha de nacimiento: </label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="Fecha"
+                  name="Fecha"
+                  required
+                  value="2000-01-01"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="pais">País</label><br />
+                <select class="form-select" name="Pais" id="Pais">
+                  <option value="Chile">Chile</option>
+                  <option value="Argentina">Argentina</option>
+                  <option value="Perú">Perú</option>
+                  <option value="Colombia">Colombia</option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-check-label">Genero</label>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="Genero"
+                    value="M"
+                    id="Masculino"
+                    checked
+                  />
+                  <label class="form-check-label">Masculino</label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="Genero"
+                    value="F"
+                    id="Femenino"
+                  />
+                  <label class="form-check-label">Femenino</label>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn btn-success text-center"
+                  style="margin: 10px; width: 150px; justify-content: center"
+                >
+                  Guardar
+                </button>
+              </div>
+            </form>
 
-          {% if messages %}
-            {% for message in messages %}
-              {% if message.tags == 'error' %}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              {% else %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-              {% endif %}
-              
-              {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-              
-            {% endfor %}
-          {% endif %}
-        </div>
+            {% if messages %}
+              {% for message in messages %}
+                {% if message.tags == 'error' %}
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% else %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {% endif %}
+                
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+              {% endfor %}
+            {% endif %}
+          </div>
 
         <!-- Columna del visor de usuarios registrados -->
         <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
@@ -169,4 +169,4 @@
         </div>
       </div>
     </div>
-{% endblock %}
+{% endblock content %}

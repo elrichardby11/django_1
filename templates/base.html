@@ -11,58 +11,83 @@
       crossorigin="anonymous"
     />
   </head>
-<body>
-  <nav class="navbar navbar-expand-lg" style="background-color: black">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#" style="color: white">Tutorial</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+  <body>
+    <nav class="navbar navbar-expand-lg" style="background-color: black">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="color: white">Tutorial</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              aria-current="page"
-              href="{% url 'home'%}"
-              style="color: white"
-              >Inicio</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'empleados'%}" style="color: white"
-              >Empleados</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" style="color: darkgrey"
-              >Clientes</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link disabled"
-              aria-disabled="true"
-              style="color: darkgrey"
-              >Productos</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'home'%}"
+                style="color: white"
+                >Inicio</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{% url 'empleados'%}"
+                style="color: white"
+                >Empleados</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" style="color: darkgrey"
+                >Clientes</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link disabled"
+                aria-disabled="true"
+                style="color: darkgrey"
+                >Productos</a
+              >
+            </li>
+          </ul>
 
-  <div class="container-fluid">
+            <ul class="navbar-nav ms-auto">
+          {% if user.is_authenticated %}
+          <span class="navbar-text" style="color: white">
+            Bienvenido {{ user }}
+          </span>
+        {% endif %}
+
+            {% if not user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'login'%}">Entrar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'register'%}">Registrarse</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'logout'%}">Salir</a>
+              </li>
+            {% endif %}
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
       {% block content %}
       {% endblock %}
-  </div>
-</body>
+    </div>
+  </body>
 </html>

@@ -2,11 +2,13 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from empleados.models import Empleado
+from django.contrib.auth.decorators import login_required
 
 def listaEmpleados(request):
     empleados = Empleado.objects.all()
     return render(request, "lista_empleados.html",context={"empleados": empleados,})
 
+@login_required
 def registrarEmpleado(request):
     rut = request.POST['txtRut']
     nombre = request.POST["txtNombre"]
@@ -34,10 +36,12 @@ def registrarEmpleado(request):
     finally:
         return redirect("/empleados")
     
+@login_required
 def editarEmpleado(request, rut):
     empleado = Empleado.objects.get(rut=rut)
     return render(request, "editar_empleado.html",context={"empleado": empleado,})
 
+@login_required
 def actualizarEmpleado(request):
     try:
         rut = request.POST['txtRut']
@@ -65,6 +69,7 @@ def actualizarEmpleado(request):
     finally:
         return redirect('/empleados')
 
+@login_required
 def eliminarEmpleado(request, rut):
     try:
         empleado = Empleado.objects.get(rut=rut)
