@@ -39,12 +39,20 @@ Una vez activado el entorno virtual, instala las dependencias necesarias:
 pip install -r requirements.txt
 ```
 
-### 4. Ejecuta el Proyecto
+### 4. Crea la Base de Datos
+
+El siguiente comando creará la base de datos necesaria:
+
+```bash
+python manage.py migrate
+```
+
+### 5. Ejecuta el Proyecto
 
 Ahora estás listo para ejecutar el proyecto. Dependiendo de cómo esté configurado, puedes iniciar la aplicación con:
 
 ```bash
 python manage.py runserver
 ```
-![image](https://github.com/elrichardby11/django_1/assets/76932746/35c1805c-da45-42af-b2ab-414defa927be)
+![image](https://github.com/elrichardby11/django_1/assets/76932746/0698edc1-f67d-4bb8-b335-099bf6e698e2)
 
