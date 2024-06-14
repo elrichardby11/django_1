@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container-fluid mt-3">
+        <h1>Productos</h1>
+        <div class="row">
+        <h3 class="mb-3">Editar producto</h3>
+          <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            <form
+              class="form-control"
+              method="POST"
+              style="padding: 10px"
+            >
+              {% csrf_token %}
+              <div class="mb-3 form-group">
+                <label for="txtNombre">Nombre del Producto </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtNombre"
+                  name="txtNombre"
+                  required
+                  placeholder="Nombre"
+                  value="{{producto.nombre}}"
+                />
+              </div>
+              <div class="mb-3 form-group">
+                <label for="txtPrecio">Precio </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="txtPrecio"
+                  name="txtPrecio"
+                  required
+                  placeholder="0"
+                  value="{{producto.precio}}"
+                  min=0
+                />
+              </div>
+              <div class="mb-3 form-group">
+                <label for="txtStock">Stock </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="txtStock"
+                  name="txtStock"
+                  placeholder="10"
+                  value="{{producto.stock}}"
+                  min=0
+                />
+              </div>
+              <div class="mb-3 form-group">
+                <label class="form-check-label" for="categoria">Categoria </label>
+                
+                <select class="form-select mb-3" aria-label="Default select example" name="categoria" id="categoria">
+                    {% for categoria in categorias %}
+                        <option value="{{categoria.id}}" {% if producto.categoria.id == categoria.id %} selected {% endif %}>
+                            {{categoria.nombre}}
+                        </option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn btn-success text-center"
+                  style="margin: 10px; width: 150px; justify-content: center"
+                >
+                  Guardar
+                </button>
+              </div>
+            </form>
+
+            {% if messages %}
+              {% for message in messages %}
+                {% if message.tags == 'error' %}
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% else %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {% endif %}
+                
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+              {% endfor %}
+            {% endif %}
+          </div>
+
+{% endblock content %}

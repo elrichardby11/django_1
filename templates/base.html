@@ -14,7 +14,7 @@
   <body>
     <nav class="navbar navbar-expand-lg" style="background-color: black">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="color: white">Tutorial</a>
+        <a class="navbar-brand" href="{% url 'home'%}" style="color: white">Tutorial</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -46,8 +46,8 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#" style="color: darkgrey"
-                >Clientes</a
+              <a class="nav-link" href="{% url 'productos'%}" style="color: white"
+                >Productos</a
               >
             </li>
             <li class="nav-item">
@@ -55,30 +55,30 @@
                 class="nav-link disabled"
                 aria-disabled="true"
                 style="color: darkgrey"
-                >Productos</a
+                >Clientes</a
               >
             </li>
           </ul>
 
-            <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto">
           {% if user.is_authenticated %}
-          <span class="navbar-text" style="color: white">
-            Bienvenido {{ user }}
-          </span>
-        {% endif %}
+            <span class="navbar-text" style="color: white">
+              Bienvenido {{ user }}
+            </span>
+          {% endif %}
 
-            {% if not user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'login'%}">Entrar</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'register'%}">Registrarse</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'logout'%}">Salir</a>
-              </li>
-            {% endif %}
+          {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'login'%}">Entrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'register'%}">Registrarse</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" style="color: white" href="{% url 'logout'%}">Salir</a>
+            </li>
+          {% endif %}
           </ul>
 
         </div>

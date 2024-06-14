@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container-fluid mt-3">
+        <h1>Productos</h1>
+        <div class="row">
+        <h3 class="mb-3">Agregar nuevo producto</h3>
+          <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            <form
+              class="form-control"
+              action="agregar_producto/"
+              method="POST"
+              style="padding: 10px"
+            >
+              {% csrf_token %}
+              <div class="mb-3 form-group">
+                <label for="txtNombre">Nombre del Producto </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtNombre"
+                  name="txtNombre"
+                  required
+                  placeholder="Nombre"
+                />
+              </div>
+              <div class="mb-3 form-group">
+                <label for="txtPrecio">Precio </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="txtPrecio"
+                  name="txtPrecio"
+                  required
+                  placeholder="0"
+                  min=0
+                />
+              </div>
+              <div class="mb-3 form-group">
+                <label for="txtStock">Stock </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="txtStock"
+                  name="txtStock"
+                  placeholder="10"
+                  min=0
+                />
+              </div>
+              <div class="mb-3 form-group">
+                <label class="form-check-label" for="categoria">Categoria </label>
+                
+                <select class="form-select mb-3" aria-label="Default select example" name="categoria" id="categoria">
+                    {% for categoria in categorias %}
+                        <option value="{{categoria.id}}">{{categoria.nombre}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn btn-success text-center"
+                  style="margin: 10px; width: 150px; justify-content: center"
+                >
+                  Guardar
+                </button>
+              </div>
+            </form>
+
+            {% if messages %}
+              {% for message in messages %}
+                {% if message.tags == 'error' %}
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% else %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {% endif %}
+                
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+              {% endfor %}
+            {% endif %}
+          </div>
+
+        <!-- Columna del visor de usuarios registrados -->
+        <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="row">ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoria</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for producto in productos %}
+              <tr>  
+                <td>{{producto.id}}</td>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.precio}}</td>
+                <td>{{producto.stock}}</td>
+                <td>{{producto.categoria}}</td>
+                <td class="text-center">
+                  <a
+                    href="editar_producto/{{producto.id}}"
+                    class="btn btn-primary btn-md"
+                    >Editar</a
+                  >
+                </td>
+                <td class="text-center">
+                  <a
+                    href="eliminar_producto/{{producto.id}}"
+                    class="btn btn-danger btn-md"
+                    >Eliminar</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!--  Categorias  -->
+
+
+    <div class="container-fluid mt-3">
+        <h1>Categorias</h1>
+        <div class="row">
+        <h3 class="mb-3">Agregar nueva Categoria</h3>
+          <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            <form
+              class="form-control"
+              action="#"
+              method="POST"
+              style="padding: 10px"
+            >
+              {% csrf_token %}
+              <div class="mb-3 form-group">
+                <label for="Categoria">Nombre de la categoria </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Categoria"
+                  name="Categoria"
+                  required
+                  placeholder="Nombre"
+                />
+              </div>
+              <div class="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn btn-success text-center"
+                  style="margin: 10px; width: 150px; justify-content: center"
+                >
+                  Guardar
+                </button>
+              </div>
+            </form>
+
+            {% if messages %}
+              {% for message in messages %}
+                {% if message.tags == 'error' %}
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% else %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {% endif %}
+                
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+              {% endfor %}
+            {% endif %}
+          </div>
+
+        <!-- Columna del visor de usuarios registrados -->
+        <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="row">ID</th>
+                <th>Nombre</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for categoria in categorias %}
+              <tr>  
+                <td>{{categoria.id}}</td>
+                <td>{{categoria.nombre}}</td>
+                <td>{{categoria.precio}}</td>
+                <td>{{categoria.stock}}</td>
+                <td>{{categoria.categoria}}</td>
+                <td class="text-center">
+                  <a
+                    href="editar_producto/{{producto.id}}"
+                    class="btn btn-primary btn-md"
+                    >Editar</a
+                  >
+                </td>
+                <td class="text-center">
+                  <a
+                    href="eliminar_producto/{{producto.id}}"
+                    class="btn btn-danger btn-md"
+                    >Eliminar</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
