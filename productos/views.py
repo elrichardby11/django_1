@@ -3,6 +3,8 @@ from .models import Producto, Categoria
 from django.contrib import messages
 
 
+# PRODUCTOS
+
 def productos(request):
     categorias = Categoria.objects.all()
     productos = Producto.objects.all()
@@ -71,3 +73,54 @@ def editar_producto(request, id):
                   context={"producto": producto,
                            "categorias": categorias
                            })
+
+
+# CATEGORIAS
+
+def agregar_categoria(request):
+    nombre = request.POST["Categoria"]
+
+    try:
+        categoria = Categoria.objects.create(
+            nombre=nombre,
+        )
+    except Exception as e:
+        messages.error(request, e)
+    else:
+        messages.success(request, "Categoria agregada correctamente! ")
+    
+    return redirect("/productos")
+
+def eliminar_categoria(request, id):
+    categoria = Categoria.objects.get(id=id)
+    categoria.delete()
+    messages.success(request, "Categoria eliminada correctamente! ")
+
+    return redirect("/productos")
+
+def editar_categoria(request, id):
+    if request.method == "POST":
+        nombre = request.POST["Categoria"]
+
+        try:
+            categoria = Categoria.objects.get(id=id)
+            categoria.nombre = nombre
+            
+            categoria.save()
+
+        except Exception as e:
+            messages.error(request, e, "No se ha podido actualizar la categoria")
+        
+        else:
+            messages.success(request, "La categoria se ha actualizado correctamente! ")
+
+        finally:
+            return redirect("/productos")
+
+    categoria = Categoria.objects.get(id=id)
+
+    return render(request,
+                  "editar_categoria.html",
+                  context={"categoria": categoria,
+                           })
+

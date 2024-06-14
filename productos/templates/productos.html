@@ -83,7 +83,7 @@
             {% endif %}
           </div>
 
-        <!-- Columna del visor de usuarios registrados -->
+        <!-- Columna del visor de productos -->
         <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
           <table class="table table-striped">
             <thead>
@@ -137,7 +137,7 @@
           <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
             <form
               class="form-control"
-              action="#"
+              action="agregar_categoria/"
               method="POST"
               style="padding: 10px"
             >
@@ -150,7 +150,7 @@
                   id="Categoria"
                   name="Categoria"
                   required
-                  placeholder="Nombre"
+                  placeholder="Bebidas"
                 />
               </div>
               <div class="d-flex justify-content-center">
@@ -180,7 +180,7 @@
             {% endif %}
           </div>
 
-        <!-- Columna del visor de usuarios registrados -->
+        <!-- Columna del visor de categorias -->
         <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
           <table class="table table-striped">
             <thead>
@@ -195,19 +195,16 @@
               <tr>  
                 <td>{{categoria.id}}</td>
                 <td>{{categoria.nombre}}</td>
-                <td>{{categoria.precio}}</td>
-                <td>{{categoria.stock}}</td>
-                <td>{{categoria.categoria}}</td>
                 <td class="text-center">
                   <a
-                    href="editar_producto/{{producto.id}}"
+                    href="editar_categoria/{{categoria.id}}"
                     class="btn btn-primary btn-md"
                     >Editar</a
                   >
                 </td>
                 <td class="text-center">
                   <a
-                    href="eliminar_producto/{{producto.id}}"
+                    href="eliminar_categoria/{{categoria.id}}"
                     class="btn btn-danger btn-md"
                     >Eliminar</a
                   >
