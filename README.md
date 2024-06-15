@@ -54,5 +54,7 @@ Ahora estás listo para ejecutar el proyecto. Dependiendo de cómo esté configu
 ```bash
 python manage.py runserver
 ```
-![image](https://github.com/elrichardby11/django_1/assets/76932746/0698edc1-f67d-4bb8-b335-099bf6e698e2)
+
+## Demo
+![image](https://github.com/elrichardby11/django_1/assets/76932746/52426910-7d6f-49ac-9007-bae37fc231c4)
 
